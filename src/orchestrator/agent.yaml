@@ -1,0 +1,46 @@
+# Foundry hosted-agent manifest.
+# Reference: https://learn.microsoft.com/azure/ai-foundry/agents/concepts/hosted-agents
+schemaVersion: "1.0"
+
+name: ai-startup-team
+kind: hosted
+description: 5-agent founding crew (researcher, validator, coder, PM, outreach).
+
+container:
+  image: "${AZURE_CONTAINER_REGISTRY}/ai-startup-team:${IMAGE_TAG}"
+  port: 8080
+  protocol: invocations            # /invocations endpoint contract
+  healthPath: /health
+
+resources:
+  cpu: "1"
+  memory: "2Gi"
+  minReplicas: 1
+  maxReplicas: 5
+
+environment:
+  - name: AZURE_AI_PROJECT_ENDPOINT
+    valueFrom: project
+  - name: MODEL_RESEARCHER
+    value: gpt-5
+  - name: MODEL_VALIDATOR
+    value: o4-mini
+  - name: MODEL_CODER
+    value: gpt-4.1   # TEMP: claude-sonnet-4-5 pending marketplace approval (~2 days). Flip back when ready.
+  - name: MODEL_PM
+    value: gpt-4.1-mini
+  - name: MODEL_OUTREACH
+    value: gpt-4.1
+  - name: GITHUB_MCP_URL
+    valueFrom: secret:github-mcp-url
+  - name: AZURE_SEARCH_ENDPOINT
+    valueFrom: secret:azure-search-endpoint
+  - name: AZURE_SEARCH_INDEX
+    value: startup-memory
+
+identity:
+  type: systemAssigned             # used to call Foundry models, Search, Graph
+
+observability:
+  tracing: true                    # emit App Insights customEvents per agent step
+  contentSafety: true

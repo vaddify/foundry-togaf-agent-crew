@@ -1,0 +1,80 @@
+swagger: "2.0"
+info:
+  title: AI Startup Team
+  description: >
+    Founding crew of 5 AI agents (Business Architect, Enterprise Architect,
+    Solution Engineer, Implementation Manager, Stakeholder Engagement Lead)
+    that validate, design, and plan a startup idea using Microsoft Agent
+    Framework workflows on Azure Foundry.
+  version: "1.0"
+host: ai-startup-team.ambitiousmeadow-131f5744.eastus2.azurecontainerapps.io
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /invocations:
+    post:
+      summary: Run the startup crew on an idea
+      description: >
+        Executes the 5-agent workflow against the provided idea. Choose a
+        topology to control the orchestration pattern (simple, debate, routed,
+        full).
+      operationId: RunStartupCrew
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - input
+            properties:
+              input:
+                type: string
+                description: The startup idea to evaluate.
+                x-ms-summary: Idea
+              topology:
+                type: string
+                description: Workflow topology.
+                enum: [simple, debate, routed, full]
+                default: simple
+                x-ms-summary: Topology
+              threadId:
+                type: string
+                description: Optional client-supplied conversation id (echoed back).
+                x-ms-summary: Thread ID
+                x-ms-visibility: advanced
+      responses:
+        "200":
+          description: Crew output
+          schema:
+            type: object
+            properties:
+              output:
+                type: string
+                description: Aggregated markdown report from the crew.
+                x-ms-summary: Output
+              topology:
+                type: string
+                x-ms-summary: Topology used
+              threadId:
+                type: string
+                x-ms-summary: Thread ID
+  /health:
+    get:
+      summary: Liveness probe
+      operationId: Health
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+securityDefinitions: {}
+security: []

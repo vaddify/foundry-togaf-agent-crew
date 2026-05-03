@@ -1,0 +1,41 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# ---- Tooling ----
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ---- IDE / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ---- Foundry runtime artifacts ----
+# Keep config (agent-metadata.yaml, datasets, evaluators) â€” ignore eval results only
+.foundry/results/
+
+# ---- Secrets ----
+*.pem
+*.key
+secrets.*
+
+# ---- Local logs / smoke-test artifacts ----
+*.log
+*.out
+debate_smoke.txt
+routed_smoke.txt
+full_smoke.txt

@@ -1,0 +1,20 @@
+# Foundry workspace metadata for ai-startup-team.
+# Read by scripts/deploy.ps1 and scripts/evaluate.ps1.
+
+schemaVersion: "1.0"
+
+agentName: ai-startup-team
+resourceGroup: rg-ai-startup-team
+subscriptionId: 52b8df4d-506e-4b20-9ee7-d90289c7280b
+region: eastus2
+
+projectEndpoint: https://fnd-ai-startup-team.services.ai.azure.com/api/projects/ai-startup-team
+azureContainerRegistry: acraistartupteam3224
+
+environments:
+  dev:
+    minReplicas: 1
+    maxReplicas: 2
+  prod:
+    minReplicas: 1
+    maxReplicas: 5

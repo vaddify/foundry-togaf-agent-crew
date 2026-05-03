@@ -1,0 +1,37 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Ruff lint
+        run: ruff check src
+
+      # Smoke-test imports without calling Azure. Stubs env vars so
+      # _base.make_agent does not KeyError during module import time.
+      - name: Import smoke test
+        env:
+          AZURE_AI_PROJECT_ENDPOINT: https://example.invalid
+          MODEL_RESEARCHER: gpt-5
+          MODEL_VALIDATOR: o4
+          MODEL_CODER: claude-sonnet-4-5
+          MODEL_PM: gpt-4.1-mini
+          MODEL_OUTREACH: gpt-4.1
+        run: |
+          python -c "import src.agents.business_architect, src.agents.enterprise_architect, src.agents.solution_engineer, src.agents.implementation_manager, src.agents.stakeholder_engagement_lead; print('imports ok')"

@@ -1,0 +1,20 @@
+{"input": "AI tutor for first-year college calculus students", "tags": ["edtech","b2c"]}
+{"input": "Compliance copilot for mid-market banks navigating Basel IV", "tags": ["fintech","regulated","b2b"]}
+{"input": "Marketplace for short-term rental of pro photography gear in major US cities", "tags": ["marketplace","b2c"]}
+{"input": "AI scheduling assistant for independent dental practices", "tags": ["healthtech","smb","b2b"]}
+{"input": "Generative-design SaaS that produces injection-mold-ready CAD from a photo", "tags": ["industrial","b2b","hardware-adjacent"]}
+{"input": "Real-time voice translation earbuds for travelers, sub-200ms latency", "tags": ["consumer-hardware","b2c"]}
+{"input": "Vertical AI agent that drafts FDA 510(k) submissions for class II medical devices", "tags": ["healthtech","regulated","b2b"]}
+{"input": "Browser extension that auto-fills SOC2 vendor security questionnaires", "tags": ["devtools","b2b","plg"]}
+{"input": "AI-powered grant writer for K-12 public school teachers", "tags": ["edtech","govtech","b2c"]}
+{"input": "Subscription service that ships customized supplements based on weekly bloodwork", "tags": ["healthtech","dtc","regulated"]}
+{"input": "Open-source observability platform for LLM agent traces with eBPF kernel hooks", "tags": ["devtools","oss","b2b"]}
+{"input": "Two-sided marketplace pairing senior software engineers with stealth founders for fractional CTO work", "tags": ["marketplace","b2b"]}
+{"input": "Personal-finance copilot that negotiates lower rates on user behalf with credit-card issuers", "tags": ["fintech","b2c","regulated"]}
+{"input": "Computer-vision QA system bolted onto factory lines to catch defects in metal castings", "tags": ["industrial","b2b","cv"]}
+{"input": "AI legal-discovery tool tuned for plaintiff-side employment law firms", "tags": ["legaltech","b2b","regulated"]}
+{"input": "Esports-team operations SaaS: roster, schedule, sponsorship CRM, content calendar", "tags": ["b2b","vertical-saas","gaming"]}
+{"input": "Carbon-accounting platform that auto-imports utility bills via OAuth-style integrations", "tags": ["climate","b2b","sustainability"]}
+{"input": "AI dungeon-master for tabletop RPG groups, voice + image generation, $9/mo", "tags": ["b2c","gaming","subscription"]}
+{"input": "Drone-fleet management software for agricultural pesticide application in California", "tags": ["agritech","b2b","regulated"]}
+{"input": "Programmatic insurance for short-haul trucking owner-operators, priced per-trip via telematics", "tags": ["insurtech","b2b","regulated"]}

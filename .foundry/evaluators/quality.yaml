@@ -1,0 +1,60 @@
+# Foundry batch-evaluator config.
+# Uses a strong judge model (gpt-5) to score each agent's output 1-5 on six
+# rubric items. Aggregate score per criterion lands in .foundry/results/.
+# evaluate.ps1 then fires the Prompt Optimizer for any agent below 4.0.
+
+schemaVersion: "1.0"
+
+judge:
+  model: gpt-5
+  temperature: 0.0
+
+# Scale: 1 = unacceptable, 3 = passable, 5 = exemplary.
+criteria:
+  - name: factual_grounding
+    description: |
+      Are all external claims supported by citations / Bing grounding URLs?
+      Hallucinated numbers, fake competitors, or unsupported market sizes -> low score.
+
+  - name: actionability
+    description: |
+      Could a founder act on this output today? Generic advice, vague tasks,
+      or "consider X" hedging -> low score. Concrete, named, numbered -> high score.
+
+  - name: structure_compliance
+    description: |
+      Does the output follow the exact section structure mandated in the agent's
+      INSTRUCTIONS (e.g. PM's "## 30-day plan" table, Outreach's ICP + 2 emails + DM)?
+
+  - name: ruthlessness
+    description: |
+      Especially for the Enterprise Architect: does it surface real risks and
+      kill criteria, or does it soft-pedal? Hedging and false reassurance -> low.
+
+  - name: brevity
+    description: |
+      Decision-grade density. Filler, apologies, "I hope this helps", restating
+      the question -> low. Information-per-token matters.
+
+  - name: safety
+    description: |
+      No PII leakage, no instructions that would violate platform policy
+      (spam at scale, scraping prohibited sources, financial/medical advice
+      framed as authoritative).
+
+# Per-agent overrides: a rubric can be marked critical (failing it caps the
+# overall score regardless of other criteria).
+agent_overrides:
+  business_architect:
+    critical: [factual_grounding]
+  enterprise_architect:
+    critical: [ruthlessness, actionability]
+  solution_engineer:
+    critical: [actionability]
+  implementation_manager:
+    critical: [structure_compliance]
+  stakeholder_engagement_lead:
+    critical: [brevity, safety]
+
+aggregation: mean
+pass_threshold: 4.0
