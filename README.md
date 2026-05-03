@@ -1,5 +1,9 @@
 # AI Startup Team on Microsoft Foundry
 
+<p align="center">
+  <img src="docs/hero.png" alt="Foundry TOGAF Agent Crew - five specialist agents collaborating on Microsoft Foundry" width="820"/>
+</p>
+
 A production-grade reference implementation of a **multi-agent system on Microsoft Foundry**.
 A five-agent "founding team" — modeled after the TOGAF roles — takes a one-line startup
 idea and runs it through market research, architecture review, MVP scaffolding, delivery
@@ -91,6 +95,103 @@ the `topology` field on `/invocations`, or the `TOPOLOGY` environment variable.
 | `full`   | All three patterns combined   | Debate revision + shared scratchpad + GO / PIVOT / NO-GO router      |
 
 Implementation: [`src/orchestrator/topologies.py`](src/orchestrator/topologies.py).
+
+---
+
+## Industry use cases
+
+The crew is industry-agnostic — every role maps to a function that exists in any
+sector. Swap the input prompt and tool-grounding sources; the orchestration is
+unchanged.
+
+### Pharmaceuticals & Life Sciences
+- **Input:** "Late-phase asset for treatment-resistant depression — what's the
+  go-to-market?"
+- **Business Architect** scans clinical-trial registries, payer landscape, KOL
+  publications.
+- **Enterprise Architect** flags FDA labelling risk, REMS requirements, ICER
+  pushback scenarios → GO / PIVOT / NO-GO.
+- **Solution Engineer** scaffolds an HCP portal MVP (sample request, MSL chat).
+- **Implementation Manager** plans launch readiness across medical, market access,
+  commercial.
+- **Stakeholder Engagement Lead** drafts payer dossiers, KOL outreach, patient-
+  advocacy briefings.
+
+### Retail & Consumer Goods
+- **Input:** "Launch a private-label clean-beauty line in 6 months."
+- **BA** runs category share, SKU gap analysis, social-listening on incumbents.
+- **EA** stress-tests margin, returns rate, regulatory (INCI, FDA cosmetics).
+- **SE** builds a Shopify storefront + subscription-engine scaffold.
+- **IM** sequences supplier sourcing → packaging → DC slotting → launch windows.
+- **SEL** drafts influencer briefs, retailer line-review decks, PR pitches.
+
+### Automotive & Mobility
+- **Input:** "Subscription-based EV battery health monitoring for fleets."
+- **BA** sizes commercial-fleet TAM, OEM partnership landscape, telematics
+  competitors.
+- **EA** reviews ISO 26262 / UNECE R155 cybersecurity, OTA architecture risk.
+- **SE** scaffolds ingest pipeline (CAN bus → Azure IoT → Fabric).
+- **IM** plans pilot with one fleet operator → multi-region rollout.
+- **SEL** drafts fleet-manager outreach, OEM BD memos, dealer-network FAQs.
+
+### Banking & Financial Services
+- **Input:** "AI-assisted SMB credit underwriting for community banks."
+- **BA** profiles target banks (asset size, core platform), competitive
+  intelligence on Numerated, Biz2X, Upstart.
+- **EA** addresses fair-lending (ECOA), model risk (SR 11-7), explainability,
+  vendor-risk assessment.
+- **SE** scaffolds the underwriting API, decision-record store, audit log.
+- **IM** plans SOC 2 readiness → pilot bank → core integration.
+- **SEL** drafts CRO/CCO outreach, compliance-officer one-pagers, pilot MSAs.
+
+### Manufacturing & Industrial
+- **Input:** "Predictive maintenance SaaS for mid-market discrete manufacturers."
+- **BA** maps NAICS subsectors, PLM/MES install base, downtime-cost benchmarks.
+- **EA** evaluates OT/IT segregation, Purdue Model alignment, IEC 62443.
+- **SE** scaffolds edge-collector + Azure IoT Operations + anomaly model.
+- **IM** plans plant-pilot → multi-site rollout → MRO integration.
+- **SEL** drafts plant-manager outreach, ROI calculators, channel-partner kits.
+
+### Healthcare Providers & Payers
+- **Input:** "Ambient documentation for community-health primary-care clinics."
+- **BA** sizes target clinics, EHR install base, competitive landscape (Abridge,
+  Nuance, Suki).
+- **EA** addresses HIPAA, BAA flow, PHI residency, EHR integration risk.
+- **SE** scaffolds capture app + EHR write-back via FHIR.
+- **IM** plans clinical-pilot governance, training, change management.
+- **SEL** drafts CMO outreach, ROI per encounter, payer-partnership memos.
+
+### Energy & Utilities
+- **Input:** "Virtual power plant aggregator for residential battery owners."
+- **BA** maps ISO/RTO market structures, DR program revenue stacks.
+- **EA** evaluates ISO interconnection, IEEE 2030.5 / OpenADR, cyber.
+- **SE** scaffolds device-control gateway + bid-stack engine.
+- **IM** plans utility-pilot, regulatory filings, customer onboarding.
+- **SEL** drafts utility BD outreach, regulator briefings, homeowner FAQs.
+
+### Public Sector & GovTech
+- **Input:** "AI casework triage for state unemployment-insurance agencies."
+- **BA** profiles agency procurement vehicles (StateRAMP, NASCIO themes), peer
+  deployments.
+- **EA** reviews FedRAMP/StateRAMP Moderate, accessibility (Section 508),
+  bias-audit obligations.
+- **SE** scaffolds case-router + adjudicator workbench.
+- **IM** plans agency pilot, compliance documentation, change management.
+- **SEL** drafts CIO/Commissioner outreach, legislative briefings, vendor-list
+  applications.
+
+### Pattern: how to adapt the crew to a new vertical
+
+1. Edit each agent's `INSTRUCTIONS` constant in [`src/agents/`](src/agents/) to
+   add domain context (regulatory regime, buyer personas, vocabulary).
+2. Swap or add tool grounding — for regulated industries, give the Business
+   Architect access to the regulator's public corpus via Azure AI Search.
+3. Add a few vertical-specific rows to the golden eval set in
+   [`.foundry/datasets/golden-set.jsonl`](.foundry/datasets/golden-set.jsonl) so
+   regressions surface immediately.
+4. Pick a topology: `routed` for portfolios where many ideas are NO-GO; `debate`
+   when domain risk is high and you want explicit critique-revision; `full` when
+   both apply.
 
 ---
 
