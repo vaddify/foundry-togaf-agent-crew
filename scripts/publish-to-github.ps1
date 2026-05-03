@@ -147,8 +147,12 @@ Step "Create GitHub repo ($Visibility)"
 
 # If gh is not yet authenticated, bail with guidance â€” never auto-login.
 if ($Execute) {
-  & gh auth status 2>$null | Out-Null
-  if ($LASTEXITCODE -ne 0) {
+  $prevEAP = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  & gh auth status *> $null
+  $authOk = ($LASTEXITCODE -eq 0)
+  $ErrorActionPreference = $prevEAP
+  if (-not $authOk) {
     throw "gh CLI is not authenticated. Run: gh auth login"
   }
 }
@@ -158,8 +162,12 @@ $fullName = if ($Owner) { "$Owner/$RepoName" } else { $RepoName }
 # Check if the remote repo already exists; if so, just add it as origin.
 $exists = $false
 if ($Execute) {
-  & gh repo view $fullName 2>$null | Out-Null
+  # gh writes to stderr when the repo is missing; suppress fully and rely on $LASTEXITCODE.
+  $prevEAP = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  & gh repo view $fullName *> $null
   if ($LASTEXITCODE -eq 0) { $exists = $true }
+  $ErrorActionPreference = $prevEAP
 }
 
 if ($exists) {
