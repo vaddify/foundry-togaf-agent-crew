@@ -1,9 +1,24 @@
 # TOGAF Agent Crew on Microsoft Foundry
 
 
-<p align="center">
-  <img src="docs/hero.png" alt="Foundry TOGAF Agent Crew - five specialist agents collaborating on Microsoft Foundry" width="820"/>
-</p>
+```mermaid
+flowchart LR
+    User([User idea]) --> BA["🧭 Business Architect<br/>Phase B · gpt-5 + Bing"]
+    BA --> EA{{"🛡 Enterprise Architect<br/>Phase A · o4-mini"}}
+    EA -->|GO| SE["⚙️ Solution Engineer<br/>Phases C+D · claude-sonnet-4.5"]
+    EA -->|GO| IM["📋 Implementation Manager<br/>Phases F+G · gpt-4.1-mini"]
+    EA -->|GO| SEL["📣 Stakeholder Lead<br/>Phase H · gpt-4.1 + Graph"]
+    EA -->|PIVOT| SE
+    EA -->|NO-GO| SEL
+    SE --> Out([Aggregated report])
+    IM --> Out
+    SEL --> Out
+
+    classDef agent fill:#0078D4,stroke:#005A9E,color:#fff,rx:6,ry:6;
+    classDef io fill:#1F2937,stroke:#9CA3AF,color:#fff,rx:18,ry:18;
+    class BA,EA,SE,IM,SEL agent;
+    class User,Out io;
+```
 
 A production-grade reference implementation of a **multi-agent system on Microsoft Foundry**.
 A five-agent "founding team" — modeled after the TOGAF roles — takes a one-line startup
