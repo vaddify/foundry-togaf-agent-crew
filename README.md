@@ -1,4 +1,5 @@
-# AI Startup Team on Microsoft Foundry
+# TOGAF Agent Crew on Microsoft Foundry
+
 
 <p align="center">
   <img src="docs/hero.png" alt="Foundry TOGAF Agent Crew - five specialist agents collaborating on Microsoft Foundry" width="820"/>
